@@ -27,7 +27,7 @@ export default store(function ({ }) {
 
     state() {
       return {
-        user: {},
+        account: null,
       };
     },
     actions: {
@@ -40,8 +40,8 @@ export default store(function ({ }) {
       }
     },
     mutations: {
-      setUser(state, payload) {
-        state.user = payload;
+      setUserAccount(state, payload) {
+        state.account = payload;
       },
     },
     // enable strict mode (adds overhead!)
