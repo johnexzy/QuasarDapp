@@ -1,6 +1,6 @@
-# AFRO APES (apeclient)
+# A Quasar starter KIT for web3 apps
 
-Afro ape Dapp for minting
+Wallet Connect and Metamask providers installed
 
 ## Install the dependencies
 ```bash
