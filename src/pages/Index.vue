@@ -1,20 +1,11 @@
 <template>
   <q-page v-if="!getAccounts" class="flex flex-center">
-    <q-btn @click="connectMetaMask" color="primary" class="q-ma-md"
-      >Connect with MetaMask</q-btn
-    >
-    <q-btn @click="WalletConnect" color="secondary" class="q-ma-md"
-      >Connect with WalletConnect
-    </q-btn>
+    <q-btn @click="connectMetaMask" color="primary" class="q-ma-md">Connect with MetaMask</q-btn>
+    <q-btn @click="WalletConnect" color="secondary" class="q-ma-md">Connect with WalletConnect</q-btn>
   </q-page>
   <q-page v-else class="flex flex-center">
     <div>{{ getAccounts }}</div>
-    <q-btn
-      color="white"
-      text-color="black"
-      @click="switchAccount"
-      label="Switch Account"
-    />
+    <q-btn color="white" text-color="black" @click="switchAccount" label="Switch Account" />
   </q-page>
 </template>
 <script setup>
@@ -71,21 +62,24 @@ async function WalletConnect() {
 
   //  Get Accounts
   const accounts = await web3.eth.getAccounts();
-  const signedMessage = await web3.eth.sign(
-    "Welcome to Afroapes: The Origin",
-    accounts[0]
-  );
-  $store.commit("setUserAccount", accounts[0]);
-  // console.log(accounts)
-  console.log(web3.eth);
-  setUserAccount.value = accounts;
-  //  Get Chain Id
-  const chainId = await web3.eth.chainId();
-  console.log(chainId);
+  if (accounts.length !== 0) {
+    const signedMessage = await web3.eth.sign(
+      "Welcome to Afroapes: The Origin",
+      accounts[0]
+    );
+    $store.commit("setUserAccount", accounts[0]);
+    // console.log(accounts)
+    console.log(web3.eth);
+    setUserAccount.value = accounts;
+    //  Get Chain Id
+    const chainId = await web3.eth.chainId();
+    console.log(chainId);
 
-  //  Get Network Id
-  const networkId = await web3.eth.net.getId();
-  console.log(networkId);
+    //  Get Network Id
+    const networkId = await web3.eth.net.getId();
+    console.log(networkId);
+  }
+
 
   // walletConnectProvider.qrcodeModal.open();
 }
@@ -142,14 +136,4 @@ onMounted(() => {
   checkIfWalletIsConnected();
 });
 </script>
-<template>
-  <q-page class="flex flex-center">
-    <q-btn @click="connectMetaMask" color="primary" class="q-ma-md">Connect with MetaMask</q-btn>
-    <q-btn @click="WalletConnect" color="secondary" class="q-ma-md">Connect with WalletConnect</q-btn>
-  </q-page>
-  <!-- <q-page class="flex flex-center">
-    <div>{{ getAccounts }}</div>
-    <q-btn color="white" text-color="black" @click="Disconnect" label="disconnect" />
-  </q-page>-->
-</template>
 
