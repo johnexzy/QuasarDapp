@@ -1,17 +1,3 @@
-<template>
-  <q-page class="flex flex-center">
-    <q-btn @click="connectMetaMask" color="primary" class="q-ma-md"
-      >Connect with MetaMask</q-btn
-    >
-    <q-btn @click="WalletConnect" color="secondary" class="q-ma-md"
-      >Connect with WalletConnect
-    </q-btn>
-  </q-page>
-  <!-- <q-page class="flex flex-center">
-    <div>{{ getAccounts }}</div>
-    <q-btn color="white" text-color="black" @click="Disconnect" label="disconnect" />
-  </q-page> -->
-</template>
 <script setup>
 // import { rejects } from "assert";
 import { computed, onMounted } from "vue";
@@ -35,7 +21,7 @@ async function connectMetaMask() {
   });
   web3 = new Web3(metaMaskProvider);
   $store.commit("setUserAccount", accounts[0]);
-  metaMaskProvider.on("disconnect", function(){
+  metaMaskProvider.on("disconnect", function () {
     alert("disconnected")
   });
 }
@@ -109,21 +95,7 @@ const checkIfWalletIsConnected = async () => {
     console.log("Wallet Connect is connected");
     // checkChainId();
   }
-  // /*
-  //  * Check if we're authorized to access the user's wallet (metamask)
-  //  */
-  // const accounts = await ethereum.request({ method: "eth_accounts" });
-  // /*
-  //  * User can have multiple authorized accounts, we grab the first one if its there!
-  //  */
-  // if (accounts.length !== 0) {
-  //   const account = accounts[0];
-  //   getCurrentMintCount();
-  //   setCurrentAccount(account);
-  //   setupEventListener();
-  // } else {
-  //   console.log("No authorized account found");
-  // }
+
 };
 
 const isMetamaskConnected = async () => {
@@ -157,3 +129,14 @@ onMounted(() => {
   checkIfWalletIsConnected();
 });
 </script>
+<template>
+  <q-page class="flex flex-center">
+    <q-btn @click="connectMetaMask" color="primary" class="q-ma-md">Connect with MetaMask</q-btn>
+    <q-btn @click="WalletConnect" color="secondary" class="q-ma-md">Connect with WalletConnect</q-btn>
+  </q-page>
+  <!-- <q-page class="flex flex-center">
+    <div>{{ getAccounts }}</div>
+    <q-btn color="white" text-color="black" @click="Disconnect" label="disconnect" />
+  </q-page>-->
+</template>
+
